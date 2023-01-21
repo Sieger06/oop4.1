@@ -1,12 +1,12 @@
 package transport;
 
 public class Truck extends Transport implements Competitor {
-    public Truck() {
+    private LoadCapacity loadCapacity;
+    public Truck(String brand, String model, double engineVolume, LoadCapacity loadCapacity) {
         super("", "", 0);
+        this.loadCapacity = loadCapacity;
     }
-    public Truck(String brand, String model, double engineVolume) {
-        super(brand, model, engineVolume);
-    }
+
     @Override
     public void startMoving() {
         System.out.println("The truck is starting to move.");
@@ -27,7 +27,13 @@ public class Truck extends Transport implements Competitor {
     public void getMaximumSpeed() {
         System.out.println("Maximum car speed is: ");
     }
+    @Override
+    public void printType() {
+        System.out.println("Body type " + loadCapacity);
+    }
     public String toString() {
         return "Brand: " + getBrand() + ", " + "Model: " + getModel() + ", " + "Engine Volume: " + getEngineVolume();
     }
+    public LoadCapacity getLoadCapacity() {
+        return loadCapacity;}
 }

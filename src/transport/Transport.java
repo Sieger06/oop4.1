@@ -7,40 +7,43 @@ public abstract class Transport {
     private final String model;
     private final double engineVolume;
     public Transport(String brand, String model, double engineVolume) {
-        if (brand == null || brand.isEmpty()) {
-            this.brand = "default";
-        } else {
-            this.brand = brand;
+            this.brand = checkString(brand);
+            this.model = checkString(model);
+            this.engineVolume = checkDouble(engineVolume);
         }
-        if (model == null || model.isEmpty()) {
-            this.model = "default";
-        } else {
-            this.model = model;
-        }
-        if(engineVolume <= 0){
-            this.engineVolume = 1.5;
-        } else {
-            this.engineVolume = engineVolume;
-        }
+    protected static String checkString (String string) {
+            if (string == null || string.isBlank() || string.isEmpty()) {
+                string = "default";
+            }
+            return string;
     }
-    public double getEngineVolume(){
+    protected static double checkDouble (double i) {
+        if (i <= 0 ) {
+            i = 1.2;
+        }
+        return i;
+    }
+    public String getBrand() {
+        return brand;}
+    public String getModel() {
+        return model;}
+    public double getEngineVolume() {
         return engineVolume;
     }
     public double setEngineVolume(){
         return engineVolume;
     }
-    public String getBrand() {
-        return brand;
-    }
-    public String getModel() {
-        return model;
-    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Transport transport = (Transport) o;
         return Objects.equals(brand, transport.brand) && Objects.equals(model, transport.model);
+    }
+    @Override
+    public String toString() {
+        return "brand: " + brand + " model: " + model + "engine volume: " + engineVolume;
     }
     @Override
     public int hashCode() {
@@ -48,10 +51,8 @@ public abstract class Transport {
     }
     public abstract void startMoving();
     public abstract void stopMoving();
-
     public abstract void pitStop();
-
     public abstract void getBestLapTime();
-
     public abstract void getMaximumSpeed();
+    public abstract void printType();
 }

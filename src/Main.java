@@ -1,77 +1,55 @@
-import transport.Car;
-import transport.Bus;
-import transport.Truck;
+import transport.*;
+
 import java.time.LocalDate;
 import Driver.Driver;
 import Drivers.DriverB;
 import Drivers.DriverC;
 import Drivers.DriverD;
+
+import static transport.LoadCapacity.*;
+import transport.TransportService;
+
 public class Main {
     private static final int CURRENT_MONTH = LocalDate.now().getMonthValue();
     public static void main(String[] args) {
 
-        Car ladaGranta =new Car("Lada", "Granta", 1.7);
-        Car audiA8 = new Car("Audi", "A8 50L TDI quattro", 3.0);
-        Car bmwZ8 = new Car("BMW", "Z8", 3.0);
-        Car kiaSportage = new Car("Kia", "Sportage 4th generation", 2.4);
-        Car hyundaiAvante = new Car("Hyundai", "Avante", 1.6);
+/*        Car ladaGranta = new Car("Lada", "Granta", 1.7, BodyType.SEDAN);
+        Car audiA8 = new Car("Audi", "A8 50L TDI quattro", 3.0, BodyType.COUPE);
+        Car bmwZ8 = new Car("BMW", "Z8", 3.0, BodyType.COUPE);
+        Car kiaSportage = new Car("Kia", "Sportage 4th generation", 2.4, BodyType.CROSSOVER);
+        Car hyundaiAvante = new Car("Hyundai", "Avante", 1.6, BodyType.HATCHBACK);*/
 
-        System.out.println(ladaGranta);
-        System.out.println(audiA8);
-        System.out.println(bmwZ8);
-        bmwZ8.startMoving();
-        bmwZ8.stopMoving();
-        bmwZ8.pitStop();
-        bmwZ8.getBestLapTime();
-        bmwZ8.getMaximumSpeed();
-        System.out.println(kiaSportage);
-        System.out.println(hyundaiAvante);
-        System.out.println();
+        Car[] cars = new Car[4];
+        cars[0] = new Car("Lada", "Granta", 1.7, BodyType.SEDAN);
+        cars[1] = new Car("Audi", "A8 50L TDI quattro", 3.0, BodyType.COUPE);
+        cars[2] = new Car("BMW", "Z8", 3.0, BodyType.COUPE);
+        cars[3] = new Car("Kia", "Sportage 4th generation", 2.4, BodyType.CROSSOVER);
 
-        Bus man = new Bus("Man", "Lion's Coach", 3);
-        Bus mercerdes = new Bus("Mercedes-Benz", "Travego RHD 15 RHD", 3);
-        Bus scania = new Bus("Scania", "Touring 6X2", 3);
-        Bus KingLong = new Bus("King Long", "XMQ6129Y", 3);
+        Bus[] buses = new Bus[4];
+        buses[0] = new Bus("Man", "Lion's Coach", 3, BusCapacity.SMALL);
+        buses[1] = new Bus("Mercedes-Benz", "Travego RHD 15 RHD", 3, BusCapacity.BIG);
+        buses[2] = new Bus("Scania", "Touring 6X2", 3, BusCapacity.MIDDLE);
+        buses[3] = new Bus("King Long", "XMQ6129Y", 3, BusCapacity.EXTRA_BIG);
 
-        System.out.println(man);
-        System.out.println(mercerdes);
-        mercerdes.startMoving();
-        mercerdes.stopMoving();
-        mercerdes.pitStop();
-        mercerdes.getBestLapTime();
-        mercerdes.getMaximumSpeed();
-        System.out.println(scania);
-        System.out.println(KingLong);
-        System.out.println();
+        Truck[] trucks = new Truck[4];
+        trucks[0] = new Truck("Volvo", "Wild Viking", 12.4, N1);
+        trucks[1] = new Truck("Scania", "Red Pearl R999", 15.6, N2);
+        trucks[2] = new Truck("Thor", "24", 27.9, N3);
+        trucks[3] = new Truck("Freightliner", "Cascadia Banks Super-Turbo", 14, N2);
 
-        Truck volvo = new Truck("Volvo", "Wild Viking", 12.4);
-        Truck scaniaTruck = new Truck("Scania", "Red Pearl R999", 15.6);
-        Truck thor = new Truck("Thor", "24", 27.9);
-        Truck Freightliner = new Truck("Freightliner", "Cascadia Banks Super-Turbo", 14);
+        TransportService.printTruckWithEnum(trucks);
+        trucks[0].printType();
+        TransportService.printCarWithEnum(cars);
+        cars[0].printType();
+        TransportService.printBusWithEnum(buses);
+        buses[0].printType();
 
-        System.out.println(volvo);
-        System.out.println(scaniaTruck);
-        System.out.println(thor);
-        thor.startMoving();
-        thor.stopMoving();
-        thor.pitStop();
-        thor.getBestLapTime();
-        thor.getMaximumSpeed();
-        System.out.println(Freightliner);
-        System.out.println();
 
-/*        DriverD<Bus> ilja = new DriverD<Bus>("Aleksei Andreevich Semenov", true, 12);
-        ilja.drive(mercerdes);
-        DriverB<Car> andrej = new DriverB<Car>("Andrej Alekseevich Mihailov", true, 11);
-        andrej.drive(bmwZ8);
-        DriverC<Truck> sergej = new DriverC<Truck>("Sergej Aleksandrovich Skvortcov", true, 10);
-        sergej.drive(thor);*/
-
-        DriverB driverB = new DriverB("Aleksey Semenov", 10, bmwZ8);
+/*        DriverB driverB = new DriverB("Aleksey Semenov", 10, bmwZ8);
         System.out.println(driverB);
         DriverC driverC = new DriverC("Andrey Mihailov", 10, volvo);
         System.out.println(driverC);
         DriverD driverD = new DriverD("Sergej Skvortcov", 10, mercerdes);
-        System.out.println(driverD);
+        System.out.println(driverD);*/
     }
 }
