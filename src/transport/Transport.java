@@ -3,14 +3,19 @@ package transport;
 import java.util.Objects;
 
 public abstract class Transport {
-    private final String brand;
-    private final String model;
-    private final double engineVolume;
-    public Transport(String brand, String model, double engineVolume) {
-            this.brand = checkString(brand);
-            this.model = checkString(model);
-            this.engineVolume = checkDouble(engineVolume);
-        }
+    private String brand;
+    private String model;
+    private double engineVolume;
+    Transport(String brand, String model) {
+        this.brand = checkString(brand);
+        this.model =  checkString(model);
+        this.engineVolume = checkDouble(engineVolume);
+    }
+    Transport(String brand, String model, double engineVolume) {
+        this.brand = checkString(brand);
+        this.model =  checkString(model);
+        this.engineVolume = checkDouble(engineVolume);
+    }
     protected static String checkString (String string) {
             if (string == null || string.isBlank() || string.isEmpty()) {
                 string = "default";

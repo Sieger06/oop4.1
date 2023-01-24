@@ -1,10 +1,9 @@
+import Drivers.Driver;
+import Exceptions.LicenseExceptions;
 import transport.*;
 
 import java.time.LocalDate;
-import Driver.Driver;
-import Drivers.DriverB;
-import Drivers.DriverC;
-import Drivers.DriverD;
+import Drivers.*;
 
 import static transport.LoadCapacity.*;
 import transport.TransportService;
@@ -12,12 +11,6 @@ import transport.TransportService;
 public class Main {
     private static final int CURRENT_MONTH = LocalDate.now().getMonthValue();
     public static void main(String[] args) {
-
-/*        Car ladaGranta = new Car("Lada", "Granta", 1.7, BodyType.SEDAN);
-        Car audiA8 = new Car("Audi", "A8 50L TDI quattro", 3.0, BodyType.COUPE);
-        Car bmwZ8 = new Car("BMW", "Z8", 3.0, BodyType.COUPE);
-        Car kiaSportage = new Car("Kia", "Sportage 4th generation", 2.4, BodyType.CROSSOVER);
-        Car hyundaiAvante = new Car("Hyundai", "Avante", 1.6, BodyType.HATCHBACK);*/
 
         Car[] cars = new Car[4];
         cars[0] = new Car("Lada", "Granta", 1.7, BodyType.SEDAN);
@@ -44,12 +37,24 @@ public class Main {
         TransportService.printBusWithEnum(buses);
         buses[0].printType();
 
+        System.out.println();
+        DriverB driver1 = new DriverB("Aleksey Semenov",null, 10);
+        DriverC driver2 = new DriverC("Andrey Mihailov", "C", 10);
+        DriverD driver3 = new DriverD("Sergej Skvortcov", "D", 10);
 
-/*        DriverB driverB = new DriverB("Aleksey Semenov", 10, bmwZ8);
-        System.out.println(driverB);
-        DriverC driverC = new DriverC("Andrey Mihailov", 10, volvo);
-        System.out.println(driverC);
-        DriverD driverD = new DriverD("Sergej Skvortcov", 10, mercerdes);
-        System.out.println(driverD);*/
+        checkDriver(driver1, driver2, driver3);
+        driver1.driving(cars[2]);
+        driver2.driving(buses[1]);
+        driver3.driving(trucks[2]);
+    }
+    private static void checkDriver(Driver... drivers) {
+        for(Driver driver: drivers){
+            try{
+                Driver.checkLicense(driver);
+            }catch (LicenseExceptions e){
+                System.out.println("Driver " + driver.getFullName() + " have a problem with license");
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }
